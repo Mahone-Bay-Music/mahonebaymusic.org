@@ -34,7 +34,8 @@ const pages = {
         body: "Join us each Wednesday at 7:00 PM, July through September, as MBMA works to re-establish Mahone Bay as a great music destination through free, community-centered performances.",
         banner: "/assets/images/banner.webp",
         bannerFit: "contain",
-        image: "/assets/images/gazebo.webp",
+        image: "/assets/images/cta2026.webp",
+        imageLink: "sponsors/become-a-sponsor",
         imageNote: "MBMA gazebo and logo.",
         quickLinks: [
             { label: "View Summer 2026", route: "schedule/summer-2026" },
@@ -257,7 +258,9 @@ function renderPage() {
                 <ul class="info-list">${cardsMarkup}</ul>
             </div>
             <aside>
-                <img class="side-image" src="${page.image}" alt="${page.title} visual">
+                ${page.imageLink
+                    ? `<a href="${routePath(page.imageLink)}" data-route="${page.imageLink}" aria-label="Open ${page.title} related page"><img class="side-image" src="${page.image}" alt="${page.title} visual"></a>`
+                    : `<img class="side-image" src="${page.image}" alt="${page.title} visual">`}
             </aside>
         </section>
     `;
