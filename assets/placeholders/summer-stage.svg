@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Summer concert placeholder">
+  <rect width="1600" height="900" fill="#122d43"/>
+  <rect y="560" width="1600" height="340" fill="#34556b"/>
+  <rect x="420" y="360" width="760" height="250" rx="18" fill="#1f3d53"/>
+  <rect x="510" y="400" width="580" height="120" fill="#eec17b" opacity="0.87"/>
+  <circle cx="560" cy="450" r="34" fill="#f7e5bf"/>
+  <circle cx="760" cy="450" r="34" fill="#f7e5bf"/>
+  <circle cx="960" cy="450" r="34" fill="#f7e5bf"/>
+  <circle cx="230" cy="625" r="34" fill="#96a9b6"/>
+  <circle cx="310" cy="655" r="30" fill="#8ca3b1"/>
+  <circle cx="1370" cy="635" r="32" fill="#8ea5b2"/>
+  <text x="800" y="170" text-anchor="middle" font-family="Georgia, serif" font-size="68" fill="#f7e4be">Summer Series Placeholder</text>
+  <text x="800" y="238" text-anchor="middle" font-family="Verdana, sans-serif" font-size="34" fill="#bfced8">Wednesdays 7:00 PM | July - September</text>
+</svg>
