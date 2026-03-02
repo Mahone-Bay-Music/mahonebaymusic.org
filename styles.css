@@ -1,12 +1,12 @@
 :root {
-    --sea-900: #0e3b42;
-    --sea-700: #1f6c75;
-    --sea-500: #3f9aa4;
+    --sea-900: #1a5f86;
+    --sea-700: #3b9ed4;
+    --sea-500: #71ccff;
     --sand-100: #f4efe2;
     --sand-200: #e9debf;
     --sun-400: #efb94f;
     --leaf-500: #4d8a58;
-    --ink: #243134;
+    --ink: #1f5f82;
     --white: #ffffff;
     --card-shadow: 0 12px 35px rgba(20, 57, 63, 0.15);
 }
