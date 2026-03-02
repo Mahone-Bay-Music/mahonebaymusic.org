@@ -17,7 +17,7 @@
 
 body {
     margin: 0;
-    font-family: "Nunito", "Trebuchet MS", sans-serif;
+    font-family: "Segoe UI", "SF Pro Text", "Helvetica Neue", "Noto Sans", Arial, sans-serif;
     color: var(--ink);
     background: linear-gradient(155deg, #f6f1e8, #f0fbfc 55%, #e6f5e8);
     min-height: 100vh;
@@ -55,7 +55,7 @@ body {
 }
 
 h1 {
-    font-family: "Bree Serif", "Palatino Linotype", serif;
+    font-family: "Segoe UI Semibold", "Segoe UI", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
     margin: 0;
     font-size: clamp(1.3rem, 2.5vw, 2rem);
 }
@@ -233,7 +233,7 @@ h1 {
 .content-panel h2 {
     margin-top: 0;
     margin-bottom: 0.45rem;
-    font-family: "Bree Serif", "Palatino Linotype", serif;
+    font-family: "Segoe UI Semibold", "Segoe UI", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
 }
 
 .content-panel p {
