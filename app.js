@@ -11,8 +11,8 @@ const navConfig = [
     {
         label: "Schedule",
         children: [
-            { label: "Summer 2026", route: "schedule/summer-2026" },
-            { label: "Past Summers", route: "schedule/past-summers" }
+            { label: "Summer 2026", route: "schedule" },
+            { label: "Past Summers", route: "archives" }
         ]
     },
     { label: "Social", route: "social" },
@@ -38,7 +38,7 @@ const pages = {
         imageLink: "sponsors/become-a-sponsor",
         imageNote: "MBMA gazebo and logo.",
         quickLinks: [
-            { label: "View Summer 2026", route: "schedule/summer-2026" },
+            { label: "View Summer 2026", route: "schedule" },
             { label: "Follow MBMA", route: "social" },
             { label: "Support MBMA", route: "sponsors/become-a-sponsor" }
         ],
@@ -92,7 +92,7 @@ const pages = {
             ["Time", "Wednesdays at 7:00 PM"]
         ]
     },
-    "schedule/summer-2026": {
+    schedule: {
         title: "Summer 2026 Schedule",
         intro: "The 2026 series is planned for 12 Wednesdays at 7:00 PM from July through September.",
         body: "Publish lineup announcements, artist bios, and weather notices here. Until finalized, this section can show placeholders grouped by month.",
@@ -104,30 +104,6 @@ const pages = {
             ["Season Length", "12 weekends of events"],
             ["Core Slot", "Wednesday 7:00 PM"],
             ["Updates", "Posted here and on Instagram"]
-        ]
-    },
-    "schedule/past-summers": {
-        title: "Past Summers",
-        intro: "Archive previous lineups, posters, and notable performances.",
-        body: "2025 Concert Series highlights: July 2 to September 17, Wednesdays from 7:00-8:00 PM at Mahone Bay Gazebo, with rain date Sunday September 21.",
-        banner: "/assets/images/banner.webp",
-        bannerFit: "contain",
-        image: "/assets/images/banner.webp",
-        imageNote: "Official 2025 Summer Concert Series poster.",
-        cards: [
-            ["July 2", "Daniel James McFadyen"],
-            ["July 9", "Morgan Davis"],
-            ["July 16", "Mike Simon"],
-            ["July 23", "Dedee Austin"],
-            ["July 30", "Norma MacDonald"],
-            ["Aug 6", "Carson Downy"],
-            ["Aug 13", "Avery Dakin"],
-            ["Aug 20", "Moira & Claire"],
-            ["Aug 27", "Brigid"],
-            ["Sept 3", "The Town Heroes"],
-            ["Sept 10", "Freya Milliken"],
-            ["Sept 17", "Kane & Potvin"],
-            ["Earlier", "Legacy materials in progress"]
         ]
     },
     social: {
@@ -173,14 +149,13 @@ const pages = {
     archives: {
         title: "Archives",
         intro: "A growing record of performances, programs, and community stories.",
-        body: "This area can host downloadable posters, highlight reels, and stories from past summers.",
-        banner: "/assets/placeholders/archives-reel.svg",
-        image: "/assets/placeholders/archives-reel.svg",
-        imageNote: "Placeholder image: archive preview.",
-        cards: [
-            ["Photos", "Albums by season"],
-            ["Programs", "PDF posters and lineups"],
-            ["Stories", "Community memories and milestones"]
+        body: "Browse official MBMA poster artwork by year. Scroll for more. Click to view the gallery.",
+        gallery: [
+            { year: 2025, src: "/assets/images/archives/mbma-poster-2025.webp" },
+            { year: 2024, src: "/assets/images/archives/mbma-poster-2024.webp" },
+            { year: 2023, src: "/assets/images/archives/mbma-poster-2023.webp" },
+            { year: 2022, src: "/assets/images/archives/mbma-poster-2022.webp" },
+            { year: 2021, src: "/assets/images/archives/mbma-poster-2021.webp" }
         ]
     },
     contact: {
@@ -237,11 +212,30 @@ function renderPage() {
     const app = document.getElementById("app");
     const showBanner = route === defaultRoute;
 
-    const cardsMarkup = page.cards
+    const cardsMarkup = (page.cards || [])
         .map(([label, value]) => `<li class="info-item"><strong>${label}</strong><span>${value}</span></li>`)
         .join("");
     const quickLinksMarkup = (page.quickLinks || [])
         .map((link) => `<a href="${routePath(link.route)}" data-route="${link.route}">${link.label}</a>`)
+        .join("");
+    const isArchives = route === "archives";
+    const galleryMarkup = (page.gallery || [])
+        .map((item, idx) => `
+            <figure class="archive-item">
+                <button class="archive-open" type="button" data-archive-index="${idx}">
+                    <img src="${item.src}" alt="MBMA poster ${item.year}" loading="lazy">
+                </button>
+                <figcaption>${item.year}</figcaption>
+            </figure>
+        `)
+        .join("");
+    const firstPoster = (page.gallery && page.gallery[0]) || null;
+    const lightboxThumbs = (page.gallery || [])
+        .map((item, idx) => `
+            <button class="archive-thumb ${idx === 0 ? "active" : ""}" type="button" data-archive-index="${idx}">
+                <img src="${item.src}" alt="MBMA poster ${item.year}">
+            </button>
+        `)
         .join("");
 
     app.innerHTML = `
@@ -249,15 +243,26 @@ function renderPage() {
         <section class="hero">
             <img class="hero-banner ${page.bannerFit === "contain" ? "hero-banner-contain" : ""}" src="${page.banner}" alt="MBMA section banner placeholder">
         </section>` : ""}
-        <section class="content-panel">
+        <section class="content-panel${isArchives ? " archives-layout" : ""}">
             <div>
                 <h2>${page.title}</h2>
                 <p>${page.intro}</p>
                 ${quickLinksMarkup ? `<div class="quick-links">${quickLinksMarkup}</div>` : ""}
                 <p>${page.body}</p>
-                <ul class="info-list">${cardsMarkup}</ul>
+                ${isArchives ? `<section class="archive-gallery">${galleryMarkup}</section>
+                <section id="archive-lightbox" class="archive-lightbox" hidden>
+                    <div class="archive-lightbox-inner">
+                        <button id="archive-lightbox-close" class="archive-close" type="button" aria-label="Close poster viewer">×</button>
+                        <div class="archive-lightbox-stage">
+                            <button id="archive-lightbox-prev" class="archive-nav archive-prev" type="button" aria-label="Previous poster">‹</button>
+                            <img id="archive-lightbox-image" class="archive-lightbox-image" src="${firstPoster ? firstPoster.src : ""}" alt="${firstPoster ? `MBMA poster ${firstPoster.year}` : "Archive poster"}">
+                            <button id="archive-lightbox-next" class="archive-nav archive-next" type="button" aria-label="Next poster">›</button>
+                        </div>
+                        <div class="archive-lightbox-strip">${lightboxThumbs}</div>
+                    </div>
+                </section>` : `<ul class="info-list">${cardsMarkup}</ul>`}
             </div>
-            <aside>
+            <aside${isArchives ? " class=\"hidden\"" : ""}>
                 ${page.imageLink
                     ? `<a href="${routePath(page.imageLink)}" data-route="${page.imageLink}" aria-label="Open ${page.title} related page"><img class="side-image" src="${page.image}" alt="${page.title} visual"></a>`
                     : `<img class="side-image" src="${page.image}" alt="${page.title} visual">`}
@@ -334,6 +339,62 @@ function init() {
         const link = event.target.closest("a[data-route]");
         if (!event.target.closest("#site-nav") && desktopMedia.matches) {
             closeAllSubmenus();
+        }
+        const setArchiveSelection = (idx) => {
+            const modal = document.getElementById("archive-lightbox");
+            const mainImg = document.getElementById("archive-lightbox-image");
+            if (!modal || !mainImg) {
+                return;
+            }
+            const thumbs = Array.from(modal.querySelectorAll(".archive-thumb"));
+            if (!thumbs.length) {
+                return;
+            }
+            const bounded = Math.max(0, Math.min(idx, thumbs.length - 1));
+            const chosen = thumbs[bounded];
+            const img = chosen ? chosen.querySelector("img") : null;
+            if (!img) {
+                return;
+            }
+            mainImg.src = img.src;
+            mainImg.alt = img.alt;
+            thumbs.forEach((t, i) => t.classList.toggle("active", i === bounded));
+            modal.dataset.currentIndex = String(bounded);
+
+            const prevBtn = document.getElementById("archive-lightbox-prev");
+            const nextBtn = document.getElementById("archive-lightbox-next");
+            if (prevBtn) {
+                prevBtn.disabled = bounded === 0;
+            }
+            if (nextBtn) {
+                nextBtn.disabled = bounded === thumbs.length - 1;
+            }
+        };
+        const archiveTrigger = event.target.closest("[data-archive-index]");
+        if (archiveTrigger) {
+            const modal = document.getElementById("archive-lightbox");
+            if (modal) {
+                const idx = Number(archiveTrigger.getAttribute("data-archive-index") || 0);
+                setArchiveSelection(idx);
+                modal.hidden = false;
+            }
+            return;
+        }
+        if (event.target.id === "archive-lightbox-prev" || event.target.id === "archive-lightbox-next") {
+            const modal = document.getElementById("archive-lightbox");
+            if (!modal) {
+                return;
+            }
+            const current = Number(modal.dataset.currentIndex || 0);
+            setArchiveSelection(current + (event.target.id === "archive-lightbox-next" ? 1 : -1));
+            return;
+        }
+        if (event.target.id === "archive-lightbox-close" || event.target.id === "archive-lightbox") {
+            const modal = document.getElementById("archive-lightbox");
+            if (modal) {
+                modal.hidden = true;
+            }
+            return;
         }
         if (!link) {
             return;
