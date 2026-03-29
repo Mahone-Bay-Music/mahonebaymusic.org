@@ -38,7 +38,7 @@ const pages = {
         body: "Concerts are held weekly on Wednesday evenings at the Bandstand on Main St and feature local, regional and national Canadian music artists. Our primary mandate is to establish Mahone Bay as a go-to destination for music events in addition to its well-established tourism activities.",
         banner: "/assets/images/banner.webp",
         bannerFit: "contain",
-        image: "/assets/images/gazebo.webp",
+        image: "/assets/images/concert2.webp",
         imageNote: "Gazebo and MBMA logo.",
         cards: [
             ["Founded as", "a community-led initiative"],
@@ -52,7 +52,7 @@ const pages = {
         intro: "Concerts are held at the gazebo in the center of Mahone Bay.",
         body: "The concert location is at <strong>563 Main St, Mahone Bay, NS B0J 2E0</strong>.",
         banner: "/assets/placeholders/harbor-banner.svg",
-        image: "/assets/images/gazebo.webp",
+        image: "/assets/images/concert1.webp",
         imageNote: "Gazebo location visual.",
         cards: [
             ["Town", "Mahone Bay, Nova Scotia"],
@@ -81,7 +81,7 @@ const pages = {
         intro: "Follow MBMA here online for lineup announcements and event information.",
         body: "Follow MBMA on social media for lineup drops, weekly reminders, and weather updates.",
         banner: "/assets/placeholders/harbor-banner.svg",
-        image: "/assets/images/gazebo.webp",
+        image: "/assets/images/concert3.webp",
         imageNote: "",
         cards: [
             ["Instagram", "<a href=\"https://www.instagram.com/mahonebaymusic/\" target=\"_blank\" rel=\"noopener noreferrer\">@mahonebaymusic</a>"],
