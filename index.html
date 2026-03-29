@@ -3,82 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Something amazing is on the way! We're working hard to bring you something incredible. Stay tuned for our upcoming launch.">
-    <title>Coming Soon</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #4ba272 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .container {
-            text-align: center;
-            max-width: 600px;
-            padding: 2rem;
-        }
-
-        .logo {
-            display: block;
-            width: 100%;
-            max-width: 120px;
-            height: auto;
-            margin: 0 auto 1.5rem;
-            border-radius: 8px;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            letter-spacing: -2px;
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-
-        .description {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 3rem;
-            opacity: 0.8;
-        }
-
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .subtitle {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+    <meta name="description" content="Mahone Bay Music Association (MBMA) hosts summer live music at the town gazebo in Mahone Bay.">
+    <title>Mahone Bay Music Association</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="icon" href="/assets/favicon/favicon.ico">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <div class="container">
-        <img src="mbma.jpg" alt="Mahone Bay Music Association logo" class="logo">
-        <h1>Coming Soon</h1>
-        <p class="subtitle">Mahone Bay Music Association</p>
-        <p class="description">
-            A new website for the MBMA is on it's way!
-        </p>
+    <div class="site-bg" aria-hidden="true"></div>
+    <header class="site-header">
+        <div class="brand-wrap">
+            <a href="/" data-route="home" aria-label="Go to home page">
+                <img src="/assets/images/gazebo.webp" alt="Mahone Bay Music Association logo" class="logo">
+            </a>
+            <div>
+                <p class="eyebrow">Mahone Bay, Nova Scotia</p>
+                <h1>Mahone Bay Music Association</h1>
+                <p class="tagline">Community-driven summer music at the town gazebo.</p>
+            </div>
+        </div>
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav id="site-nav" class="site-nav" aria-label="Main navigation"></nav>
+    </header>
 
-    </div>
+    <main id="app" class="app" tabindex="-1"></main>
+
+    <footer class="site-footer">
+        <p>MBMA is a non-profit organization supporting live music in Mahone Bay, Nova Scotia, Canada.</p>
+        <p>Summer Series: Wednesdays at 7:00 PM, July through September.</p>
+    </footer>
+
+    <noscript>Please enable JavaScript to view the full single-page site experience.</noscript>
+    <script type="module" src="/app.js"></script>
 </body>
 </html>
