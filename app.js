@@ -29,13 +29,13 @@ const pages = {
             ["Summer Series", "Wednesdays at 7:00 PM"],
             ["Season", "July to September"],
             ["Location", "Town Gazebo, 563 Main St, Mahone Bay, NS <a class=\"inline-map-link\" href=\"https://maps.app.goo.gl/uXkBsz17rsQormnZ6\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Open location in Google Maps\"><svg class=\"inline-map-icon\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M15.5,12C18,12 20,14 20,16.5C20,17.38 19.75,18.21 19.31,18.9L22.39,22L21,23.39L17.88,20.32C17.19,20.75 16.37,21 15.5,21C13,21 11,19 11,16.5C11,14 13,12 15.5,12M15.5,14A2.5,2.5 0 0,0 13,16.5A2.5,2.5 0 0,0 15.5,19A2.5,2.5 0 0,0 18,16.5A2.5,2.5 0 0,0 15.5,14M14,6.11L8,4V15.89L9,16.24V16.5C9,17.14 9.09,17.76 9.26,18.34L8,17.9L2.66,19.97L2.5,20A0.5,0.5 0 0,1 2,19.5V4.38C2,4.15 2.15,3.97 2.36,3.9L8,2L14,4.1L19.34,2H19.5A0.5,0.5 0 0,1 20,2.5V11.81C18.83,10.69 17.25,10 15.5,10C15,10 14.5,10.06 14,10.17V6.11Z\" /></svg></a>"],
-            ["Mission", "Establish Mahone Bay as a go-to destination for music events in addition to its well established tourism activities."]
+            ["Mission", "Establish Mahone Bay as a go-to destination for music events in addition to its well-established tourism activities."]
         ]
     },
     about: {
         title: "About MBMA",
         intro: "The <strong>Mahone Bay Music Association</strong> is a not for profit music association that presents and promotes free to the public concerts during the Summer months in the town of Mahone Bay, Nova Scotia.",
-        body: "Concerts are held weekly on Wednesday evenings at the Bandstand on Main St and feature local, regional and national Canadian music artists. Our primary mandate is to establish Mahone Bay as a go-to destination for music events in addition to its well established tourism activities.",
+        body: "Concerts are held weekly on Wednesday evenings at the Bandstand on Main St and feature local, regional and national Canadian music artists. Our primary mandate is to establish Mahone Bay as a go-to destination for music events in addition to its well-established tourism activities.",
         banner: "/assets/images/banner.webp",
         bannerFit: "contain",
         image: "/assets/images/gazebo.webp",
@@ -44,7 +44,7 @@ const pages = {
             ["Founded as", "a community-led initiative"],
             ["Format", "Free weekly summer evening concerts"],
             ["Audience", "Residents, visitors, and families"],
-            ["Mission", "Establish Mahone Bay as a go-to destination for music events in addition to its well established tourism activities."]
+            ["Mission", "Establish Mahone Bay as a go-to destination for music events in addition to its well-established tourism activities."]
         ]
     },
     location: {
@@ -97,10 +97,10 @@ const pages = {
     },
     sponsor: {
         title: "Become a Sponsor",
-        intro: "Support local music and community events by sponsoring MBMA.",
-        body: "",
-        banner: "/assets/placeholders/sponsor-wall.svg",
-        image: "/assets/placeholders/sponsor-wall.svg",
+        intro: "Entering the 7th season, the Mahone Bay Music Association (MBMA) summer concert series has become a Wednesday night staple, drawing residents and tourists to Mahone Bay for 12 weeks of free, world-class music from July to September.",
+        body: "Your partnership doesn't just keep the music playing, it puts your brand front-and-center to our digital followers and a live audience throughout the summer.",
+        banner: "/assets/images/cta2026.webp",
+        image: "/assets/images/cta2026.webp",
         imageLink: "sponsors",
         imageNote: "Placeholder image: partnership callout.",
         cards: [
