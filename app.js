@@ -1,30 +1,13 @@
 const navConfig = [
     { label: "Home", route: "home" },
-    {
-        label: "About",
-        children: [
-            { label: "Location", route: "location" },
-            { label: "History", route: "about/history" },
-            { label: "Contacts", route: "about/contacts" }
-        ]
-    },
-    {
-        label: "Schedule",
-        children: [
-            { label: "Summer 2026", route: "schedule" },
-            { label: "Past Summers", route: "archives" }
-        ]
-    },
+    { label: "Location", route: "location" },
+    { label: "Schedule", route: "schedule" },
     { label: "Social", route: "social" },
-    {
-        label: "Sponsors",
-        children: [
-            { label: "Our Sponsors", route: "sponsors/our-sponsors" },
-            { label: "Become a Sponsor", route: "sponsors/become-a-sponsor" }
-        ]
-    },
-    { label: "Archives", route: "archives" },
-    { label: "Contact", route: "contact" }
+    { label: "Our Sponsors", route: "sponsors" },
+    { label: "Be a Sponsor", route: "sponsor" },
+    { label: "Past Events", route: "events" },
+    { label: "About", route: "about" },
+    { label: "Contact Us", route: "contact" }
 ];
 
 const pages = {
@@ -35,52 +18,39 @@ const pages = {
         banner: "/assets/images/banner.webp",
         bannerFit: "contain",
         image: "/assets/images/cta2026.webp",
-        imageLink: "sponsors/become-a-sponsor",
+        imageLink: "sponsor",
         imageNote: "MBMA gazebo and logo.",
         quickLinks: [
             { label: "View Summer 2026", route: "schedule" },
             { label: "Follow MBMA", route: "social" },
-            { label: "Support MBMA", route: "sponsors/become-a-sponsor" }
+            { label: "Support MBMA", route: "sponsor" }
         ],
         cards: [
             ["Summer Series", "Wednesdays at 7:00 PM"],
             ["Season", "July to September"],
             ["Location", "Town Gazebo, 563 Main St, Mahone Bay, NS <a class=\"inline-map-link\" href=\"https://maps.app.goo.gl/uXkBsz17rsQormnZ6\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Open location in Google Maps\"><svg class=\"inline-map-icon\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M15.5,12C18,12 20,14 20,16.5C20,17.38 19.75,18.21 19.31,18.9L22.39,22L21,23.39L17.88,20.32C17.19,20.75 16.37,21 15.5,21C13,21 11,19 11,16.5C11,14 13,12 15.5,12M15.5,14A2.5,2.5 0 0,0 13,16.5A2.5,2.5 0 0,0 15.5,19A2.5,2.5 0 0,0 18,16.5A2.5,2.5 0 0,0 15.5,14M14,6.11L8,4V15.89L9,16.24V16.5C9,17.14 9.09,17.76 9.26,18.34L8,17.9L2.66,19.97L2.5,20A0.5,0.5 0 0,1 2,19.5V4.38C2,4.15 2.15,3.97 2.36,3.9L8,2L14,4.1L19.34,2H19.5A0.5,0.5 0 0,1 20,2.5V11.81C18.83,10.69 17.25,10 15.5,10C15,10 14.5,10.06 14,10.17V6.11Z\" /></svg></a>"],
-            ["Mission", "Re-establish Mahone Bay as a great music destination!"]
+            ["Mission", "Establish Mahone Bay as a go-to destination for music events in addition to its well established tourism activities."]
         ]
     },
-    "about/history": {
-        title: "Our Story",
-        intro: "MBMA is a community non-profit on a mission to re-establish Mahone Bay as a great music destination.",
-      body: "Each summer, volunteers and supporters coordinate a 12-week series of live performances at the gazebo in the town center. The Summer Series currently runs Wednesdays at 7:00 PM from July through September.",
+    about: {
+        title: "About MBMA",
+        intro: "The <strong>Mahone Bay Music Association</strong> is a not for profit music association that presents and promotes free to the public concerts during the Summer months in the town of Mahone Bay, Nova Scotia.",
+        body: "Concerts are held weekly on Wednesday evenings at the Bandstand on Main St and feature local, regional and national Canadian music artists. Our primary mandate is to establish Mahone Bay as a go-to destination for music events in addition to its well established tourism activities.",
         banner: "/assets/images/banner.webp",
         bannerFit: "contain",
         image: "/assets/images/gazebo.webp",
         imageNote: "Gazebo and MBMA logo.",
         cards: [
-            ["Founded", "Community-led revival initiative"],
-            ["Format", "Weekly summer evening concerts"],
+            ["Founded as", "a community-led initiative"],
+            ["Format", "Free weekly summer evening concerts"],
             ["Audience", "Residents, visitors, and families"],
-            ["Mission", "Keep free, community-centered live music active in Mahone Bay."]
-        ]
-    },
-    "about/contacts": {
-        title: "Organizing Team",
-        intro: "MBMA operates through volunteers, partners, and local supporters.",
-        body: "Add official board and volunteer contact details here as they become available. Keep role-based addresses for continuity (for example, bookings@ and sponsorship@).",
-        banner: "/assets/placeholders/harbor-banner.svg",
-        image: "/assets/images/gazebo.webp",
-        imageNote: "MBMA gazebo and logo.",
-        cards: [
-            ["General", "info@mahonebaymusic.org"],
-            ["Booking", "bookings@mahonebaymusic.org"],
-            ["Sponsorships", "sponsors@mahonebaymusic.org"]
+            ["Mission", "Establish Mahone Bay as a go-to destination for music events in addition to its well established tourism activities."]
         ]
     },
     location: {
         title: "Location",
         intro: "Concerts are held at the gazebo in the center of Mahone Bay.",
-        body: "The concert location is at 563 Main St, Mahone Bay, NS B0J 2E0. Add accessibility notes, parking details, and rain information here as they are finalized.",
+        body: "The concert location is at <strong>563 Main St, Mahone Bay, NS B0J 2E0</strong>.",
         banner: "/assets/placeholders/harbor-banner.svg",
         image: "/assets/images/gazebo.webp",
         imageNote: "Gazebo location visual.",
@@ -94,15 +64,15 @@ const pages = {
     },
     schedule: {
         title: "Summer 2026 Schedule",
-        intro: "The 2026 series is planned for 12 Wednesdays at 7:00 PM from July through September.",
-        body: "Publish lineup announcements, artist bios, and weather notices here. Until finalized, this section can show placeholders grouped by month.",
+        intro: "The 2026 series is planned for from July through September at 7:00 PM each Wednesday.",
+        body: "The schedule for artists performing in 2026 will be announced soon.",
         banner: "/assets/images/banner.webp",
         bannerFit: "contain",
         image: "/assets/placeholders/summer-stage.svg",
         imageNote: "Placeholder image: stage and audience scene.",
         cards: [
-            ["Season Length", "12 weekends of events"],
-            ["Core Slot", "Wednesday 7:00 PM"],
+            ["Season Length", "Every Wednesday from July through September."],
+            ["Scheduled Time", "Wednesdays 7 PM to 8 PM"],
             ["Updates", "Posted here and on Instagram"]
         ]
     },
@@ -116,29 +86,22 @@ const pages = {
         cards: [
             ["Instagram", "<a href=\"https://www.instagram.com/mahonebaymusic/\" target=\"_blank\" rel=\"noopener noreferrer\">@mahonebaymusic</a>"],
             ["Facebook", "<a href=\"https://www.facebook.com/mahonebaymusic/\" target=\"_blank\" rel=\"noopener noreferrer\">facebook.com/mahonebaymusic</a>"],
-            ["Website", "<a href=\"/\">mahonebaymusic.org</a>"],
             ["Message", "Join us at the Gazebo every Wednesday 7pm (July - Sept)."]
         ]
     },
-    "sponsors/our-sponsors": {
+    sponsors: {
         title: "Our Sponsors",
-        intro: "Sponsors and partners help keep MBMA concerts free and accessible.",
-        body: "Use this section to feature sponsor logos, contribution tiers, and gratitude messaging.",
-        banner: "/assets/placeholders/sponsor-wall.svg",
-        image: "/assets/placeholders/sponsor-wall.svg",
-        imageNote: "Placeholder image: sponsor showcase board.",
-        cards: [
-            ["Presenting", "Placeholder Sponsor"],
-            ["Community", "Placeholder Sponsor"],
-            ["In-Kind", "Placeholder Partner"]
-        ]
+        intro: "Sponsors and partners help keep MBMA concerts free and accessible. Please support our sponsors so that they can continue to support our community.",
+        body: "",
+        sponsorWallTitle: "Thank You Sponsors!"
     },
-    "sponsors/become-a-sponsor": {
+    sponsor: {
         title: "Become a Sponsor",
         intro: "Support local music and community events by sponsoring MBMA.",
-        body: "Add sponsorship levels, benefits, deadlines, and a downloadable package once ready.",
+        body: "",
         banner: "/assets/placeholders/sponsor-wall.svg",
         image: "/assets/placeholders/sponsor-wall.svg",
+        imageLink: "sponsors",
         imageNote: "Placeholder image: partnership callout.",
         cards: [
             ["Ideal For", "Local businesses and patrons"],
@@ -146,8 +109,8 @@ const pages = {
             ["Contact", "sponsors@mahonebaymusic.org"]
         ]
     },
-    archives: {
-        title: "Archives",
+    events: {
+        title: "Past Events",
         intro: "A growing record of performances, programs, and community stories.",
         body: "Browse official MBMA poster artwork by year. Scroll for more. Click to view the gallery.",
         gallery: [
@@ -160,8 +123,8 @@ const pages = {
     },
     contact: {
         title: "Contact",
-        intro: "Questions, volunteering, and artist inquiries are welcome.",
-        body: "Use this section for direct role-based email links and directions to the summer venue.",
+        intro: "Feel free to contact us if you are a local Maritime artist, wish to sponsor or volunteer, or with any question regarding the summer music events.",
+        body: "",
         banner: "/assets/placeholders/harbor-banner.svg",
         image: "/assets/images/gazebo.webp",
         imageNote: "Gazebo and venue support.",
@@ -169,16 +132,24 @@ const pages = {
             ["General", "info@mahonebaymusic.org"],
             ["Volunteer", "volunteer@mahonebaymusic.org"],
             ["Artists", "bookings@mahonebaymusic.org"],
+            ["Sponsorships", "sponsors@mahonebaymusic.org"],
             ["Venue Address", "563 Main St, Mahone Bay, NS B0J 2E0 <a class=\"inline-map-link\" href=\"https://maps.app.goo.gl/uXkBsz17rsQormnZ6\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Open location in Google Maps\"><svg class=\"inline-map-icon\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M15.5,12C18,12 20,14 20,16.5C20,17.38 19.75,18.21 19.31,18.9L22.39,22L21,23.39L17.88,20.32C17.19,20.75 16.37,21 15.5,21C13,21 11,19 11,16.5C11,14 13,12 15.5,12M15.5,14A2.5,2.5 0 0,0 13,16.5A2.5,2.5 0 0,0 15.5,19A2.5,2.5 0 0,0 18,16.5A2.5,2.5 0 0,0 15.5,14M14,6.11L8,4V15.89L9,16.24V16.5C9,17.14 9.09,17.76 9.26,18.34L8,17.9L2.66,19.97L2.5,20A0.5,0.5 0 0,1 2,19.5V4.38C2,4.15 2.15,3.97 2.36,3.9L8,2L14,4.1L19.34,2H19.5A0.5,0.5 0 0,1 20,2.5V11.81C18.83,10.69 17.25,10 15.5,10C15,10 14.5,10.06 14,10.17V6.11Z\" /></svg></a>"]
         ]
     }
 };
 
 const defaultRoute = "home";
+const legacyRouteRedirects = {
+    archives: "events",
+    "sponsors/our-sponsors": "sponsors",
+    "sponsors/become-a-sponsor": "sponsor",
+    "about/history": "about",
+    "about/contacts": "contact"
+};
 
 function currentRoute() {
     const normalized = window.location.pathname.replace(/^\/+|\/+$/g, "");
-    return normalized || defaultRoute;
+    return legacyRouteRedirects[normalized] || normalized || defaultRoute;
 }
 
 function routePath(route) {
@@ -217,7 +188,9 @@ function renderPage() {
     const quickLinksMarkup = (page.quickLinks || [])
         .map((link) => `<a href="${routePath(link.route)}" data-route="${link.route}">${link.label}</a>`)
         .join("");
-    const isArchives = route === "archives";
+    const isArchives = route === "events";
+    const isSponsorsPage = route === "sponsors";
+    const sponsorWallMarkup = Array.from({ length: 15 }, (_, idx) => `<div class="sponsor-wall-tile sponsor-wall-tone-${(idx % 6) + 1}">Your Logo Here</div>`).join("");
     const galleryMarkup = (page.gallery || [])
         .map((item, idx) => `
             <figure class="archive-item">
@@ -242,7 +215,7 @@ function renderPage() {
         <section class="hero">
             <img class="hero-banner ${page.bannerFit === "contain" ? "hero-banner-contain" : ""}" src="${page.banner}" alt="MBMA section banner placeholder">
         </section>` : ""}
-        <section class="content-panel${isArchives ? " archives-layout" : ""}">
+        <section class="content-panel${isArchives ? " archives-layout" : ""}${isSponsorsPage ? " sponsors-layout" : ""}">
             <div>
                 <h2>${page.title}</h2>
                 <p>${page.intro}</p>
@@ -259,9 +232,14 @@ function renderPage() {
                         </div>
                         <div class="archive-lightbox-strip">${lightboxThumbs}</div>
                     </div>
-                </section>` : `<ul class="info-list">${cardsMarkup}</ul>`}
+                </section>` : isSponsorsPage
+                    ? `<section class="sponsor-wall" aria-label="${page.sponsorWallTitle}">
+                    <h3>${page.sponsorWallTitle}</h3>
+                    <div class="sponsor-wall-grid">${sponsorWallMarkup}</div>
+                </section>`
+                    : `<ul class="info-list">${cardsMarkup}</ul>`}
             </div>
-            <aside${isArchives ? " class=\"hidden\"" : ""}>
+            <aside${isArchives || isSponsorsPage ? " class=\"hidden\"" : ""}>
                 ${page.imageLink
                     ? `<a href="${routePath(page.imageLink)}" data-route="${page.imageLink}" aria-label="Open ${page.title} related page"><img class="side-image" src="${page.image}" alt="${page.title} visual"></a>`
                     : `<img class="side-image" src="${page.image}" alt="${page.title} visual">`}

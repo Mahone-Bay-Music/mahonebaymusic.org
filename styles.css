@@ -235,6 +235,10 @@ h1 {
     grid-template-columns: 1fr;
 }
 
+.content-panel.sponsors-layout {
+    grid-template-columns: 1fr;
+}
+
 .content-panel h2 {
     margin-top: 0;
     margin-bottom: 0.45rem;
@@ -296,6 +300,55 @@ h1 {
     border-radius: 14px;
     min-height: 170px;
     object-fit: cover;
+}
+
+.sponsor-wall {
+    margin-top: 1rem;
+}
+
+.sponsor-wall h3 {
+    margin: 0 0 0.9rem;
+    color: #194d53;
+}
+
+.sponsor-wall-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.sponsor-wall-tile {
+    min-height: 110px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #30555b;
+}
+
+.sponsor-wall-tone-1 {
+    background: #d4e7ea;
+}
+
+.sponsor-wall-tone-2 {
+    background: #e5efd3;
+}
+
+.sponsor-wall-tone-3 {
+    background: #f0dfb8;
+}
+
+.sponsor-wall-tone-4 {
+    background: #e7d8c8;
+}
+
+.sponsor-wall-tone-5 {
+    background: #d9e8dc;
+}
+
+.sponsor-wall-tone-6 {
+    background: #dce1ef;
 }
 
 .hidden {
@@ -519,6 +572,10 @@ h1 {
     .info-item {
         grid-template-columns: 1fr;
         gap: 0.2rem;
+    }
+
+    .sponsor-wall-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .archive-gallery {
