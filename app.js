@@ -91,8 +91,8 @@ const pages = {
     },
     sponsors: {
         title: "Our Sponsors",
-        intro: "Sponsors and partners help keep MBMA concerts free and accessible. Please support our sponsors so that they can continue to support our community.",
-        body: "",
+        intro: "Sponsors and partners help keep MBMA concerts free and accessible.",
+        body: "Please support our sponsors so that they can continue to support our music and our community.",
         sponsorWallTitle: "Thank You Sponsors!"
     },
     sponsor: {
