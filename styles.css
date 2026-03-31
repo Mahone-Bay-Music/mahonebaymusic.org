@@ -292,6 +292,11 @@ h1 {
     vertical-align: middle;
 }
 
+.inline-map-link-full {
+    gap: 0.35rem;
+    margin-left: 0;
+}
+
 .inline-map-icon {
     width: 24px;
     height: 24px;
