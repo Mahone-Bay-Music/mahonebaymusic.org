@@ -1,6 +1,6 @@
 {
   "name": "mahonebaymusic-org",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -8,6 +8,6 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^5.4.11"
+    "vite": "^8.0.3"
   }
 }
