@@ -103,11 +103,6 @@ const pages = {
         ctaImages: [
             "/assets/images/cta2026.webp",
             "/assets/images/cta2026b.webp"
-        ],
-        cards: [
-            ["Ideal For", "Local businesses and patrons"],
-            ["Benefits", "Brand visibility and community impact"],
-            ["Contact", "sponsors@mahonebaymusic.org"]
         ]
     },
     events: {
@@ -243,8 +238,7 @@ function renderPage() {
                     <div class="sponsor-wall-grid">${sponsorWallMarkup}</div>
                 </section>`
                     : isSponsorCtaPage
-                        ? `<ul class="info-list">${cardsMarkup}</ul>
-                <section class="sponsor-cta-grid" aria-label="${page.title} images">${sponsorCtaMarkup}</section>`
+                        ? `<section class="sponsor-cta-grid" aria-label="${page.title} images">${sponsorCtaMarkup}</section>`
                     : `<ul class="info-list">${cardsMarkup}</ul>`}
             </div>
             <aside${isArchives || isSponsorsPage || isSponsorCtaPage ? " class=\"hidden\"" : ""}>
