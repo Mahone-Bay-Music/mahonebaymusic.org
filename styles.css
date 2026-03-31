@@ -239,6 +239,10 @@ h1 {
     grid-template-columns: 1fr;
 }
 
+.content-panel.sponsor-cta-layout {
+    grid-template-columns: 1fr;
+}
+
 .content-panel h2 {
     margin-top: 0;
     margin-bottom: 0.45rem;
@@ -352,6 +356,20 @@ h1 {
 
 .sponsor-wall-tone-6 {
     background: #dce1ef;
+}
+
+.sponsor-cta-grid {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.sponsor-cta-image {
+    width: 100%;
+    display: block;
+    border-radius: 14px;
+    object-fit: cover;
 }
 
 .hidden {
@@ -579,6 +597,10 @@ h1 {
 
     .sponsor-wall-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .sponsor-cta-grid {
+        grid-template-columns: 1fr;
     }
 
     .archive-gallery {

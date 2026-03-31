@@ -17,7 +17,7 @@ const pages = {
         body: "Join us each Wednesday at 7:00 PM, July through September, as MBMA works to re-establish Mahone Bay as a great music destination through free, community-centered performances.",
         banner: "/assets/images/banner.webp",
         bannerFit: "contain",
-        image: "/assets/images/cta2026.webp",
+        image: "/assets/images/concert1.webp",
         imageLink: "sponsor",
         imageNote: "MBMA gazebo and logo.",
         quickLinks: [
@@ -52,7 +52,7 @@ const pages = {
         intro: "Concerts are held at the gazebo in the center of Mahone Bay.",
         body: "The concert location is at <strong>563 Main St, Mahone Bay, NS B0J 2E0</strong>.",
         banner: "/assets/placeholders/harbor-banner.svg",
-        image: "/assets/images/concert1.webp",
+        image: "/assets/images/concert2.webp",
         imageNote: "Gazebo location visual.",
         cards: [
             ["Town", "Mahone Bay, Nova Scotia"],
@@ -100,9 +100,10 @@ const pages = {
         intro: "Entering the 7th season, the Mahone Bay Music Association (MBMA) summer concert series has become a Wednesday night staple, drawing residents and tourists to Mahone Bay for 12 weeks of free, world-class music from July to September.",
         body: "Your partnership doesn't just keep the music playing, it puts your brand front-and-center to our digital followers and a live audience throughout the summer.",
         banner: "/assets/images/cta2026.webp",
-        image: "/assets/images/cta2026.webp",
-        imageLink: "sponsors",
-        imageNote: "Placeholder image: partnership callout.",
+        ctaImages: [
+            "/assets/images/cta2026.webp",
+            "/assets/images/cta2026b.webp"
+        ],
         cards: [
             ["Ideal For", "Local businesses and patrons"],
             ["Benefits", "Brand visibility and community impact"],
@@ -190,7 +191,11 @@ function renderPage() {
         .join("");
     const isArchives = route === "events";
     const isSponsorsPage = route === "sponsors";
+    const isSponsorCtaPage = route === "sponsor";
     const sponsorWallMarkup = Array.from({ length: 15 }, (_, idx) => `<div class="sponsor-wall-tile sponsor-wall-tone-${(idx % 6) + 1}">Your Logo Here</div>`).join("");
+    const sponsorCtaMarkup = (page.ctaImages || [])
+        .map((src, idx) => `<img class="sponsor-cta-image" src="${src}" alt="${page.title} visual ${idx + 1}">`)
+        .join("");
     const galleryMarkup = (page.gallery || [])
         .map((item, idx) => `
             <figure class="archive-item">
@@ -215,7 +220,7 @@ function renderPage() {
         <section class="hero">
             <img class="hero-banner ${page.bannerFit === "contain" ? "hero-banner-contain" : ""}" src="${page.banner}" alt="MBMA section banner placeholder">
         </section>` : ""}
-        <section class="content-panel${isArchives ? " archives-layout" : ""}${isSponsorsPage ? " sponsors-layout" : ""}">
+        <section class="content-panel${isArchives ? " archives-layout" : ""}${isSponsorsPage ? " sponsors-layout" : ""}${isSponsorCtaPage ? " sponsor-cta-layout" : ""}">
             <div>
                 <h2>${page.title}</h2>
                 <p>${page.intro}</p>
@@ -237,9 +242,12 @@ function renderPage() {
                     <h3>${page.sponsorWallTitle}</h3>
                     <div class="sponsor-wall-grid">${sponsorWallMarkup}</div>
                 </section>`
+                    : isSponsorCtaPage
+                        ? `<ul class="info-list">${cardsMarkup}</ul>
+                <section class="sponsor-cta-grid" aria-label="${page.title} images">${sponsorCtaMarkup}</section>`
                     : `<ul class="info-list">${cardsMarkup}</ul>`}
             </div>
-            <aside${isArchives || isSponsorsPage ? " class=\"hidden\"" : ""}>
+            <aside${isArchives || isSponsorsPage || isSponsorCtaPage ? " class=\"hidden\"" : ""}>
                 ${page.imageLink
                     ? `<a href="${routePath(page.imageLink)}" data-route="${page.imageLink}" aria-label="Open ${page.title} related page"><img class="side-image" src="${page.image}" alt="${page.title} visual"></a>`
                     : `<img class="side-image" src="${page.image}" alt="${page.title} visual">`}
