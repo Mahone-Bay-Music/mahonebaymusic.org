@@ -45,10 +45,12 @@ pnpm preview
 - `public/_redirects`: SPA fallback for static hosting
 - `public/robots.txt`: Crawling rules
 - `public/sitemap.xml`: Route sitemap
+- `functions/api/instagram-latest.js`: Cloudflare Pages Function that returns the latest Instagram embed
 
 ## Deployment Notes
 
 - Build command: `pnpm build`
 - Output directory: `dist`
 - For Cloudflare Pages, deploy from `dist/` and keep `_redirects` so history-mode routes resolve to `index.html`.
-
+- The Social page calls `/api/instagram-latest`, which caches the latest public Instagram post embed for one hour.
+- The Instagram username defaults to `mahonebaymusic`. Override it with an optional `INSTAGRAM_USERNAME` Pages environment variable.
