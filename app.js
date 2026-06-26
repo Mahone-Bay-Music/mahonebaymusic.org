@@ -20,6 +20,8 @@ const pages = {
         image: "/assets/images/concert1.webp",
         imageLink: "sponsor",
         imageNote: "MBMA gazebo and logo.",
+        imageBelowCards: true,
+        instagramFeed: "aside",
         quickLinks: [
             { label: "View Summer 2026", route: "schedule" },
             { label: "Follow MBMA", route: "social" },
@@ -65,11 +67,11 @@ const pages = {
     schedule: {
         title: "Summer 2026 Schedule",
         intro: "The 2026 series is planned for from July through September at 7:00 PM each Wednesday.",
-        body: "<strong>The schedule for artists performing in 2026 will be announced soon.</strong>",
+        body: "",
         banner: "/assets/images/banner.webp",
         bannerFit: "contain",
-        image: "/assets/placeholders/summer-stage.svg",
-        imageNote: "Placeholder image: stage and audience scene.",
+        image: "/assets/images/poster2026.jpg",
+        imageNote: "2026 Summer Concert Series poster.",
         cards: [
             ["Season Length", "Every Wednesday from July through September."],
             ["Scheduled Time", "Wednesdays 7 PM to 8 PM"],
@@ -83,6 +85,7 @@ const pages = {
         banner: "/assets/placeholders/harbor-banner.svg",
         image: "/assets/images/concert3.webp",
         imageNote: "",
+        instagramFeed: "content",
         cards: [
             ["Instagram", "<a href=\"https://www.instagram.com/mahonebaymusic/\" target=\"_blank\" rel=\"noopener noreferrer\">@mahonebaymusic</a>"],
             ["Facebook", "<a href=\"https://www.facebook.com/mahonebaymusic/\" target=\"_blank\" rel=\"noopener noreferrer\">facebook.com/mahonebaymusic</a>"],
@@ -135,6 +138,7 @@ const pages = {
 };
 
 const defaultRoute = "home";
+const fallbackInstagramPostUrl = "https://www.instagram.com/p/DZfdA89H1br/";
 const legacyRouteRedirects = {
     archives: "events",
     "sponsors/our-sponsors": "sponsors",
@@ -187,6 +191,7 @@ function renderPage() {
     const isArchives = route === "events";
     const isSponsorsPage = route === "sponsors";
     const isSponsorCtaPage = route === "sponsor";
+    const hasAsideInstagramFeed = page.instagramFeed === "aside";
     const sponsorWallMarkup = Array.from({ length: 15 }, (_, idx) => `<div class="sponsor-wall-tile sponsor-wall-tone-${(idx % 6) + 1}">Your Logo Here</div>`).join("");
     const sponsorCtaMarkup = (page.ctaImages || [])
         .map((src, idx) => `<img class="sponsor-cta-image" src="${src}" alt="${page.title} visual ${idx + 1}">`)
@@ -209,13 +214,32 @@ function renderPage() {
             </button>
         `)
         .join("");
+    const instagramFeedMarkup = page.instagramFeed
+        ? `<section class="instagram-feed" aria-labelledby="instagram-feed-title">
+            <div class="instagram-feed-header">
+                <h3 id="instagram-feed-title">Latest on Instagram</h3>
+                <a href="https://www.instagram.com/mahonebaymusic/" target="_blank" rel="noopener noreferrer">Open Instagram</a>
+            </div>
+            <div id="instagram-latest" class="instagram-embed-shell" aria-live="polite">
+                <p>Loading latest post...</p>
+            </div>
+        </section>`
+        : "";
+    const contentInstagramFeedMarkup = page.instagramFeed === "content" ? instagramFeedMarkup : "";
+    const imageBelowCardsMarkup = page.imageBelowCards && page.image
+        ? `<div class="inline-feature-image">
+            ${page.imageLink
+                ? `<a href="${routePath(page.imageLink)}" data-route="${page.imageLink}" aria-label="Open ${page.title} related page"><img class="side-image" src="${page.image}" alt="${page.title} visual"></a>`
+                : `<img class="side-image" src="${page.image}" alt="${page.title} visual">`}
+        </div>`
+        : "";
 
     app.innerHTML = `
         ${showBanner ? `
         <section class="hero">
             <img class="hero-banner ${page.bannerFit === "contain" ? "hero-banner-contain" : ""}" src="${page.banner}" alt="MBMA section banner placeholder">
         </section>` : ""}
-        <section class="content-panel${isArchives ? " archives-layout" : ""}${isSponsorsPage ? " sponsors-layout" : ""}${isSponsorCtaPage ? " sponsor-cta-layout" : ""}">
+        <section class="content-panel${isArchives ? " archives-layout" : ""}${isSponsorsPage ? " sponsors-layout" : ""}${isSponsorCtaPage ? " sponsor-cta-layout" : ""}${hasAsideInstagramFeed ? " feed-aside-layout" : ""}">
             <div>
                 <h2>${page.title}</h2>
                 <p>${page.intro}</p>
@@ -239,10 +263,12 @@ function renderPage() {
                 </section>`
                     : isSponsorCtaPage
                         ? `<section class="sponsor-cta-grid" aria-label="${page.title} images">${sponsorCtaMarkup}</section>`
-                    : `<ul class="info-list">${cardsMarkup}</ul>`}
+                    : `<ul class="info-list">${cardsMarkup}</ul>${imageBelowCardsMarkup}${contentInstagramFeedMarkup}`}
             </div>
             <aside${isArchives || isSponsorsPage || isSponsorCtaPage ? " class=\"hidden\"" : ""}>
-                ${page.imageLink
+                ${page.instagramFeed === "aside"
+                    ? instagramFeedMarkup
+                    : page.imageLink
                     ? `<a href="${routePath(page.imageLink)}" data-route="${page.imageLink}" aria-label="Open ${page.title} related page"><img class="side-image" src="${page.image}" alt="${page.title} visual"></a>`
                     : `<img class="side-image" src="${page.image}" alt="${page.title} visual">`}
             </aside>
@@ -252,6 +278,85 @@ function renderPage() {
     document.querySelectorAll("[data-route]").forEach((el) => {
         el.classList.toggle("active", el.getAttribute("data-route") === route);
     });
+
+    if (page.instagramFeed) {
+        loadLatestInstagramPost();
+    }
+}
+
+function loadInstagramScript() {
+    return new Promise((resolve, reject) => {
+        if (window.instgrm?.Embeds) {
+            resolve();
+            return;
+        }
+
+        const existing = document.querySelector("script[src='https://www.instagram.com/embed.js']");
+        if (existing) {
+            existing.addEventListener("load", resolve, { once: true });
+            existing.addEventListener("error", reject, { once: true });
+            return;
+        }
+
+        const script = document.createElement("script");
+        script.src = "https://www.instagram.com/embed.js";
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.appendChild(script);
+    });
+}
+
+async function loadLatestInstagramPost() {
+    const target = document.getElementById("instagram-latest");
+
+    if (!target) {
+        return;
+    }
+
+    try {
+        const response = await fetch("/api/instagram-latest", {
+            headers: {
+                "Accept": "application/json"
+            }
+        });
+        const body = await response.json();
+
+        if (!response.ok || !body.html) {
+            throw new Error(body.detail || "No Instagram post was returned.");
+        }
+
+        target.innerHTML = body.html;
+        await loadInstagramScript();
+        window.instgrm?.Embeds?.process();
+    } catch (error) {
+        renderFallbackInstagramPost(target);
+    }
+}
+
+async function renderFallbackInstagramPost(target) {
+    try {
+        const embedUrl = new URL("https://graph.facebook.com/v25.0/instagram_oembed");
+        embedUrl.searchParams.set("url", fallbackInstagramPostUrl);
+        embedUrl.searchParams.set("omitscript", "true");
+        embedUrl.searchParams.set("maxwidth", "540");
+
+        const response = await fetch(embedUrl);
+        const body = await response.json();
+
+        if (!response.ok || !body.html) {
+            throw new Error("Fallback post embed could not be loaded.");
+        }
+
+        target.innerHTML = body.html;
+        await loadInstagramScript();
+        window.instgrm?.Embeds?.process();
+    } catch (error) {
+        target.innerHTML = `
+            <p>Latest Instagram post could not be loaded.</p>
+            <a href="${fallbackInstagramPostUrl}" target="_blank" rel="noopener noreferrer">View the latest known Instagram post</a>
+        `;
+    }
 }
 
 function navigateTo(route, replace = false) {
