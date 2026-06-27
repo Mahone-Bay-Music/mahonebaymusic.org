@@ -154,11 +154,13 @@ const sponsorTiers = [
         sponsors: [
             {
                 name: "United Soils, Tiny Seedlings, and Trinity Row",
-                logo: "/assets/images/sponsors/presenting/UnitedSoils-TinySeedlings-TrinityRow.webp"
+                logo: "/assets/images/sponsors/presenting/UnitedSoils-TinySeedlings-TrinityRow.webp",
+                url: "https://tinyseedlings.com/"
             },
             {
                 name: "Town of Mahone Bay",
-                logo: "/assets/images/sponsors/presenting/town-of-mahone-bay.webp"
+                logo: "/assets/images/sponsors/presenting/town-of-mahone-bay.webp",
+                url: "https://www.townofmahonebay.ca/"
             }
         ]
     },
@@ -168,11 +170,13 @@ const sponsorTiers = [
         sponsors: [
             {
                 name: "Alcorp",
-                logo: "/assets/images/sponsors/gold/alcorp.webp"
+                logo: "/assets/images/sponsors/gold/alcorp.webp",
+                url: "https://alc.ca/"
             },
             {
-                name: "Spil the Tea",
-                logo: "/assets/images/sponsors/gold/spil-the-tea.webp"
+                name: "Spill The Tea",
+                logo: "/assets/images/sponsors/gold/spil-the-tea.webp",
+                url: "https://spilltheteamahonebay.com/"
             }
         ]
     },
@@ -182,11 +186,13 @@ const sponsorTiers = [
         sponsors: [
             {
                 name: "Castle Building Centre",
-                logo: "/assets/images/sponsors/silver/castle-building.webp"
+                logo: "/assets/images/sponsors/silver/castle-building.webp",
+                url: "https://castlensbs.com/"
             },
             {
                 name: "Municipality of the District of Lunenburg",
-                logo: "/assets/images/sponsors/silver/modl-logo-new-300x300.webp"
+                logo: "/assets/images/sponsors/silver/modl-logo-new-300x300.webp",
+                url: "https://www.modl.ca/"
             }
         ]
     },
@@ -196,19 +202,23 @@ const sponsorTiers = [
         sponsors: [
             {
                 name: "Sweet Ride Cycling",
-                logo: "/assets/images/sponsors/bronze/1-sweet-ride-cycling.webp"
+                logo: "/assets/images/sponsors/bronze/1-sweet-ride-cycling.webp",
+                url: "https://sweetridecycling.com/"
             },
             {
                 name: "RBC",
-                logo: "/assets/images/sponsors/bronze/rbc.webp"
+                logo: "/assets/images/sponsors/bronze/rbc.webp",
+                url: "https://www.rbcroyalbank.com/"
             },
             {
                 name: "Tanya Alexander",
-                logo: "/assets/images/sponsors/bronze/tanya-alexander.webp"
+                logo: "/assets/images/sponsors/bronze/tanya-alexander.webp",
+                url: "https://www.nsrealestatewithtanya.com/"
             },
             {
                 name: "The Teazer",
-                logo: "/assets/images/sponsors/bronze/the-teazer.webp"
+                logo: "/assets/images/sponsors/bronze/the-teazer.webp",
+                url: "https://theteazer.com/"
             }
         ]
     },
@@ -216,12 +226,12 @@ const sponsorTiers = [
         title: "Other Sponsors",
         className: "other",
         sponsors: [
-            { name: "Blandford Marine" },
-            { name: "Inside-Out Cleaning" },
-            { name: "Appurist Software Inc." },
-            { name: "Printer's Corner" },
-            { name: "Nick's Independent Grocer" },
-            { name: "Dan's Jam at Eli + Trix" }
+            { name: "Blandford Marine", url: "https://chester.ca/blandford-marine" },
+            { name: "Inside-Out Cleaning", url: "https://www.insideoutclean.co/" },
+            { name: "Appurist Software Inc.", url: "https://www.appurist.com/" },
+            { name: "Printer's Corner", url: "https://www.printerscorner.ca/" },
+            { name: "Nick's Independent Grocer", url: "https://www.yourindependentgrocer.ca/en/store-locator/details/1402" },
+            { name: "Dan's Jam at Eli + Trix", url: "https://www.instagram.com/p/DYUXPb0HC2i/" }
         ]
     }
 ];
@@ -256,6 +266,10 @@ function navMarkup() {
 }
 
 function sponsorWallMarkup() {
+    const sponsorContent = (sponsor) => sponsor.logo
+        ? `<img src="${sponsor.logo}" alt="${sponsor.name}" loading="lazy">`
+        : `<figcaption>${sponsor.name}</figcaption>`;
+
     return sponsorTiers
         .map((tier) => `
             <section class="sponsor-tier sponsor-tier-${tier.className}" aria-labelledby="sponsor-tier-${tier.className}">
@@ -264,9 +278,9 @@ function sponsorWallMarkup() {
                     ${tier.sponsors
                         .map((sponsor) => `
                             <figure class="sponsor-logo-card">
-                                ${sponsor.logo
-                                    ? `<img src="${sponsor.logo}" alt="${sponsor.name}" loading="lazy">`
-                                    : `<figcaption>${sponsor.name}</figcaption>`}
+                                ${sponsor.url
+                                    ? `<a href="${sponsor.url}" target="_blank" rel="noopener noreferrer" aria-label="Visit ${sponsor.name} website">${sponsorContent(sponsor)}</a>`
+                                    : sponsorContent(sponsor)}
                             </figure>
                         `)
                         .join("")}
