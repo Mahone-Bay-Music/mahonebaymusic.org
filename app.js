@@ -54,7 +54,7 @@ const pages = {
         intro: "Concerts are held at the gazebo in the center of Mahone Bay.",
         body: "The town gazebo is at <strong>563 Main St, Mahone Bay, NS</strong>.",
         banner: "/assets/placeholders/harbor-banner.svg",
-        image: "/assets/images/concert2.webp",
+        image: "/assets/images/concert1.webp",
         imageNote: "Gazebo location visual.",
         cards: [
             ["Town", "Mahone Bay, Nova Scotia"],
@@ -147,6 +147,85 @@ const legacyRouteRedirects = {
     "about/contacts": "contact"
 };
 
+const sponsorTiers = [
+    {
+        title: "Presenting Sponsors",
+        className: "presenting",
+        sponsors: [
+            {
+                name: "United Soils, Tiny Seedlings, and Trinity Row",
+                logo: "/assets/images/sponsors/presenting/UnitedSoils-TinySeedlings-TrinityRow.webp"
+            },
+            {
+                name: "Town of Mahone Bay",
+                logo: "/assets/images/sponsors/presenting/town-of-mahone-bay.webp"
+            }
+        ]
+    },
+    {
+        title: "Gold Sponsors",
+        className: "gold",
+        sponsors: [
+            {
+                name: "Alcorp",
+                logo: "/assets/images/sponsors/gold/alcorp.webp"
+            },
+            {
+                name: "Spil the Tea",
+                logo: "/assets/images/sponsors/gold/spil-the-tea.webp"
+            }
+        ]
+    },
+    {
+        title: "Silver Sponsors",
+        className: "silver",
+        sponsors: [
+            {
+                name: "Castle Building Centre",
+                logo: "/assets/images/sponsors/silver/castle-building.webp"
+            },
+            {
+                name: "Municipality of the District of Lunenburg",
+                logo: "/assets/images/sponsors/silver/modl-logo-new-300x300.webp"
+            }
+        ]
+    },
+    {
+        title: "Bronze Sponsors",
+        className: "bronze",
+        sponsors: [
+            {
+                name: "Sweet Ride Cycling",
+                logo: "/assets/images/sponsors/bronze/1-sweet-ride-cycling.webp"
+            },
+            {
+                name: "RBC",
+                logo: "/assets/images/sponsors/bronze/rbc.webp"
+            },
+            {
+                name: "Tanya Alexander",
+                logo: "/assets/images/sponsors/bronze/tanya-alexander.webp"
+            },
+            {
+                name: "The Teazer",
+                logo: "/assets/images/sponsors/bronze/the-teazer.webp"
+            }
+        ]
+    },
+    {
+        title: "Other Sponsors",
+        className: "other",
+        sponsors: [
+            { name: "Blandford Marine" },
+            { name: "Inside-Out Cleaning" },
+            { name: "Appurist Software Inc." },
+            { name: "Printer's Corner" },
+            { name: "Nick's Independent Grocer" },
+            { name: "Dan's Jam at Eli + Trix" }
+        ]
+    }
+];
+
 function currentRoute() {
     const normalized = window.location.pathname.replace(/^\/+|\/+$/g, "");
     return legacyRouteRedirects[normalized] || normalized || defaultRoute;
@@ -176,6 +255,27 @@ function navMarkup() {
         .join("");
 }
 
+function sponsorWallMarkup() {
+    return sponsorTiers
+        .map((tier) => `
+            <section class="sponsor-tier sponsor-tier-${tier.className}" aria-labelledby="sponsor-tier-${tier.className}">
+                <h3 id="sponsor-tier-${tier.className}">${tier.title}</h3>
+                <div class="sponsor-logo-grid">
+                    ${tier.sponsors
+                        .map((sponsor) => `
+                            <figure class="sponsor-logo-card">
+                                ${sponsor.logo
+                                    ? `<img src="${sponsor.logo}" alt="${sponsor.name}" loading="lazy">`
+                                    : `<figcaption>${sponsor.name}</figcaption>`}
+                            </figure>
+                        `)
+                        .join("")}
+                </div>
+            </section>
+        `)
+        .join("");
+}
+
 function renderPage() {
     const route = currentRoute();
     const page = pages[route] || pages[defaultRoute];
@@ -192,7 +292,6 @@ function renderPage() {
     const isSponsorsPage = route === "sponsors";
     const isSponsorCtaPage = route === "sponsor";
     const hasAsideInstagramFeed = page.instagramFeed === "aside";
-    const sponsorWallMarkup = Array.from({ length: 15 }, (_, idx) => `<div class="sponsor-wall-tile sponsor-wall-tone-${(idx % 6) + 1}">Your Logo Here</div>`).join("");
     const sponsorCtaMarkup = (page.ctaImages || [])
         .map((src, idx) => `<img class="sponsor-cta-image" src="${src}" alt="${page.title} visual ${idx + 1}">`)
         .join("");
@@ -258,8 +357,7 @@ function renderPage() {
                     </div>
                 </section>` : isSponsorsPage
                     ? `<section class="sponsor-wall" aria-label="${page.sponsorWallTitle}">
-                    <h3>${page.sponsorWallTitle}</h3>
-                    <div class="sponsor-wall-grid">${sponsorWallMarkup}</div>
+                    ${sponsorWallMarkup()}
                 </section>`
                     : isSponsorCtaPage
                         ? `<section class="sponsor-cta-grid" aria-label="${page.title} images">${sponsorCtaMarkup}</section>`
