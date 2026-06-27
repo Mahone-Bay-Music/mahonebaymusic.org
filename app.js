@@ -70,7 +70,7 @@ const pages = {
         body: "",
         banner: "/assets/images/banner.webp",
         bannerFit: "contain",
-        image: "/assets/images/poster2026.jpg",
+        image: "/assets/images/poster2026.png",
         imageNote: "2026 Summer Concert Series poster.",
         cards: [
             ["Season Length", "Every Wednesday from July through September."],
